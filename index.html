@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jakie Studios — We Build Apps</title>
+  <meta name="description" content="Jakie Studios crafts beautiful, thoughtful apps. First up: Moxie Vino, coming soon to the App Store." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F8F4EE;
+      --warm-white: #FDFAF6;
+      --ink: #1C1815;
+      --ink-soft: #4A4440;
+      --ink-faint: #9A918B;
+      --wine: #6B2D3E;
+      --wine-light: #9B4A5A;
+      --wine-pale: #F2E8EA;
+      --border: rgba(28, 24, 21, 0.10);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--warm-white);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.6;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .reveal {
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .reveal-1 { animation-delay: 0.1s; }
+    .reveal-2 { animation-delay: 0.25s; }
+    .reveal-3 { animation-delay: 0.4s; }
+    .reveal-4 { animation-delay: 0.55s; }
+    .reveal-5 { animation-delay: 0.7s; }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      padding: 28px 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+    .nav-contact {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-contact:hover { color: var(--wine); border-color: var(--wine); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 0 96px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-logo {
+      width: 160px;
+      height: auto;
+      display: block;
+      margin-bottom: 40px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: 24px;
+    }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-soft);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--ink-soft);
+      max-width: 440px;
+      line-height: 1.8;
+    }
+
+    /* ── MOXIE SECTION ── */
+    .moxie {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 80px;
+    }
+
+    .moxie-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .moxie-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--wine), var(--wine-light), var(--wine));
+    }
+
+    .moxie-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--wine-pale);
+      border: 1px solid rgba(107, 45, 62, 0.15);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: 24px;
+    }
+    .moxie-badge span { font-size: 0.65rem; }
+
+    .moxie-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .moxie-title em {
+      font-style: italic;
+      color: var(--wine);
+    }
+
+    .moxie-desc {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      max-width: 420px;
+      margin-bottom: 40px;
+      line-height: 1.85;
+    }
+
+    .app-store-badge {
+      display: inline-block;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .app-store-badge:hover { opacity: 0.75; transform: translateY(-1px); }
+    .app-store-badge svg { display: block; height: 40px; width: auto; }
+
+    .moxie-ornament {
+      position: absolute;
+      right: -20px; bottom: -30px;
+      font-family: var(--serif);
+      font-size: 14rem;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(107, 45, 62, 0.05);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .about-headline {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+    .about-headline em { font-style: italic; color: var(--ink-soft); }
+    .about-body {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.9;
+    }
+    .about-body p + p { margin-top: 16px; }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 96px 0;
+    }
+    .contact-inner {
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .contact-headline {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .contact-sub {
+      font-size: 0.88rem;
+      color: var(--ink-faint);
+      margin-bottom: 36px;
+    }
+    .contact-link {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--wine);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(107, 45, 62, 0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--wine); color: var(--wine-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+    }
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.03em;
+    }
+    .footer-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--wine);
+      opacity: 0.5;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .hero { padding: 56px 0 72px; }
+      .moxie-card { padding: 36px 28px; }
+      .about-grid { grid-template-columns: 1fr; gap: 28px; }
+      footer .container { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-dot { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <img src="jakie%20studios%20first%20logo%20transparent.png" alt="Jakie Studios" />
+      </a>
+      <a href="mailto:hi@jakiestudios.com" class="nav-contact">hi@jakiestudios.com</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <img src="jakie%20studios%20first%20logo%20transparent.png" alt="Jakie Studios" class="hero-logo reveal reveal-1" />
+      <p class="hero-eyebrow reveal reveal-2">Independent App Studio</p>
+      <h1 class="hero-headline reveal reveal-3">
+        We build<br /><em>beautiful apps.</em>
+      </h1>
+      <p class="hero-sub reveal reveal-4">
+        Small studio. Big care. We craft thoughtful mobile experiences — designed with intention, built to last.
+      </p>
+    </div>
+  </section>
+
+  <!-- MOXIE VINO -->
+  <section class="moxie">
+    <div class="container">
+      <p class="section-label reveal reveal-1">First Release</p>
+      <div class="moxie-card reveal reveal-2">
+        <div class="moxie-badge"><span>●</span> Coming Soon</div>
+        <h2 class="moxie-title">Moxie <em>Vino</em></h2>
+        <p class="moxie-desc">
+          Your personal wine companion. Discover, track, and remember every bottle — from cellar staples to once-in-a-lifetime pours. Coming soon to iOS.
+        </p>
+        <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+          <!-- Official Apple App Store Badge SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 119.66 40" height="40">
+            <defs>
+              <style>.a{fill:#a6a6a6}.b{fill:#fff}</style>
+            </defs>
+            <rect width="119.66" height="40" rx="7.5"/>
+            <path class="a" d="M112.16.5a7,7,0,0,1,7,7V32.5a7,7,0,0,1-7,7H7.5a7,7,0,0,1-7-7V7.5a7,7,0,0,1,7-7h104.66m0-.5H7.5A7.52,7.52,0,0,0,0,7.5V32.5A7.52,7.52,0,0,0,7.5,40h104.66a7.52,7.52,0,0,0,7.5-7.5V7.5A7.52,7.52,0,0,0,112.16,0Z"/>
+            <path class="b" d="M24.77,19.76a4.93,4.93,0,0,1,2.35-4.14,5.05,5.05,0,0,0-3.98-2.15c-1.68-.17-3.3,1-4.15,1s-2.18-1-3.59-1a5.3,5.3,0,0,0-4.46,2.72c-1.92,3.33-.49,8.23,1.36,10.92.92,1.32,2,2.8,3.4,2.74s1.9-.87,3.56-.87,2.14.87,3.59.84,2.4-1.33,3.29-2.66a10.93,10.93,0,0,0,1.5-3.08A4.77,4.77,0,0,1,24.77,19.76Z"/>
+            <path class="b" d="M21.97,11.67a4.86,4.86,0,0,0,1.11-3.48,4.95,4.95,0,0,0-3.2,1.66,4.63,4.63,0,0,0-1.14,3.35A4.09,4.09,0,0,0,21.97,11.67Z"/>
+            <path class="b" d="M42.3,27.14H37.56L36.43,30.5H34.41l4.5-12.47h2.1L45.51,30.5H43.43ZM38.07,25.59h3.73L39.96,21h-.05Z"/>
+            <path class="b" d="M55.16,26c0,2.83-1.51,4.65-3.8,4.65a3.09,3.09,0,0,1-2.86-1.59h0V33.7H46.6V21.41h1.83v1.51h0A3.23,3.23,0,0,1,51.34,21.3C53.64,21.3,55.16,23.13,55.16,26Zm-1.94,0c0-1.84-.95-3.05-2.4-3.05s-2.38,1.24-2.38,3.05.96,3.07,2.38,3.07S53.22,27.85,53.22,26Z"/>
+            <path class="b" d="M65.12,26c0,2.83-1.51,4.65-3.8,4.65a3.09,3.09,0,0,1-2.86-1.59h0V33.7H56.56V21.41h1.83v1.51h0A3.23,3.23,0,0,1,61.3,21.3C63.6,21.3,65.12,23.13,65.12,26Zm-1.94,0c0-1.84-.95-3.05-2.4-3.05s-2.38,1.24-2.38,3.05.96,3.07,2.38,3.07S63.18,27.85,63.18,26Z"/>
+            <path class="b" d="M71.71,27.05c.14,1.24,1.34,2.05,2.98,2.05,1.58,0,2.7-.81,2.7-1.93,0-.97-.68-1.55-2.29-1.95l-1.62-.39c-2.28-.55-3.34-1.62-3.34-3.35,0-2.15,1.87-3.62,4.53-3.62,2.63,0,4.43,1.47,4.49,3.62H77.3c-.11-1.25-1.13-2-2.65-2s-2.54.77-2.54,1.88c0,.89.65,1.41,2.26,1.81l1.37.34c2.55.6,3.61,1.63,3.61,3.44,0,2.33-1.85,3.78-4.8,3.78-2.76,0-4.62-1.42-4.74-3.68Z"/>
+            <path class="b" d="M83.15,19.57v1.84H84.9v1.47H83.15v4.29c0,.79.35,1.16,1.12,1.16a5.89,5.89,0,0,0,.62-.04v1.46a5.16,5.16,0,0,1-1.05.09c-1.87,0-2.6-.7-2.6-2.49V22.88H79.91V21.41h1.33V19.57Z"/>
+            <path class="b" d="M85.81,26c0-2.87,1.69-4.67,4.33-4.67S94.47,23.1,94.47,26s-1.68,4.67-4.33,4.67S85.81,28.84,85.81,26Zm6.75,0c0-1.97-.9-3.13-2.42-3.13s-2.42,1.17-2.42,3.13.9,3.13,2.42,3.13S92.56,27.94,92.56,26Z"/>
+            <path class="b" d="M95.59,21.41h1.8v1.55h.04a2.19,2.19,0,0,1,2.21-1.65,2.9,2.9,0,0,1,.65.07v1.73a2.64,2.64,0,0,0-.86-.11,1.9,1.9,0,0,0-1.96,2.11V30.5H95.59Z"/>
+            <path class="b" d="M109.22,27.84c-.25,1.66-1.87,2.8-3.94,2.8-2.66,0-4.31-1.78-4.31-4.64s1.66-4.71,4.23-4.71c2.53,0,4.13,1.74,4.13,4.51v.64H102.9v.11a2.39,2.39,0,0,0,2.47,2.6,2.08,2.08,0,0,0,2.12-1.31Zm-6.31-2.73h4.45a2.14,2.14,0,0,0-2.18-2.26A2.25,2.25,0,0,0,102.91,25.11Z"/>
+            <path class="b" d="M37.83,8.73a2.64,2.64,0,0,1,2.81,2.97c0,1.91-1.03,3-2.81,3H35.67V8.73Zm-1.23,5.11h1.12A1.86,1.86,0,0,0,39.68,11.7,1.85,1.85,0,0,0,37.72,9.6H36.6Z"/>
+            <path class="b" d="M41.48,12.86a2.13,2.13,0,1,1,4.25,0,2.13,2.13,0,1,1-4.25,0Zm3.33,0c0-.98-.44-1.55-1.2-1.55s-1.2.57-1.2,1.55.44,1.55,1.2,1.55S44.81,13.84,44.81,12.86Z"/>
+            <path class="b" d="M51.27,14.7H50.35l-.93-3.32h-.07l-.93,3.32H47.5L46.26,10.65h.9l.79,3.44h.07l.93-3.44h.86l.93,3.44h.07l.79-3.44h.89Z"/>
+            <path class="b" d="M53.68,10.65h.86v.71h.07a1.35,1.35,0,0,1,1.35-.8,1.47,1.47,0,0,1,1.56,1.67V14.7h-.89V12.47c0-.72-.31-1.08-.97-1.08a1,1,0,0,0-1.08,1.12V14.7h-.89Z"/>
+            <path class="b" d="M58.74,8.44h.89V14.7h-.89Z"/>
+            <path class="b" d="M60.78,12.86a2.13,2.13,0,1,1,4.25,0,2.13,2.13,0,1,1-4.25,0Zm3.33,0c0-.98-.44-1.55-1.2-1.55s-1.2.57-1.2,1.55.44,1.55,1.2,1.55S64.11,13.84,64.11,12.86Z"/>
+            <path class="b" d="M65.89,13.84c0-.81.6-1.27,1.67-1.34l1.21-.07v-.39c0-.47-.31-.74-.92-.74-.5,0-.84.18-.94.5h-.86c.09-.77.81-1.27,1.84-1.27,1.13,0,1.77.56,1.77,1.51V14.7h-.86v-.62h-.07a1.52,1.52,0,0,1-1.36.7A1.3,1.3,0,0,1,65.89,13.84Zm2.88-.39v-.37l-1.09.07c-.62.04-.9.26-.9.65s.35.63.82.63A1.07,1.07,0,0,0,68.77,13.45Z"/>
+            <path class="b" d="M70.66,12.86c0-1.34.69-2.19,1.76-2.19a1.4,1.4,0,0,1,1.3.74h.07V8.44h.89V14.7h-.86v-.71h-.07a1.47,1.47,0,0,1-1.33.79C71.34,14.78,70.66,13.93,70.66,12.86Zm.92,0c0,.9.43,1.44,1.14,1.44s1.15-.55,1.15-1.44-.44-1.44-1.15-1.44S71.58,11.97,71.58,12.86Z"/>
+            <path class="b" d="M77.86,12.86a2.13,2.13,0,1,1,4.25,0,2.13,2.13,0,1,1-4.25,0Zm3.33,0c0-.98-.44-1.55-1.2-1.55s-1.2.57-1.2,1.55.44,1.55,1.2,1.55S81.19,13.84,81.19,12.86Z"/>
+            <path class="b" d="M83.1,10.65H84v.71h.07a1.35,1.35,0,0,1,1.35-.8,1.47,1.47,0,0,1,1.56,1.67V14.7h-.89V12.47c0-.72-.31-1.08-.97-1.08a1,1,0,0,0-1.08,1.12V14.7H83.1Z"/>
+            <path class="b" d="M92.32,9.06v1.61h.97v.75h-.97v2.35c0,.47.19.67.63.67a3.07,3.07,0,0,0,.34-.02v.74a2.93,2.93,0,0,1-.49.05c-1,0-1.39-.35-1.39-1.24V11.42h-.71v-.75h.71V9.06Z"/>
+            <path class="b" d="M94.47,8.44h.89v2.73h.07a1.39,1.39,0,0,1,1.38-.8,1.48,1.48,0,0,1,1.55,1.68V14.7H97.47V12.48c0-.72-.33-1.09-1-1.09a1,1,0,0,0-1.12,1.12V14.7h-.89Z"/>
+            <path class="b" d="M103.67,13.56a1.82,1.82,0,0,1-1.95,1.22,2,2,0,0,1-2.04-2.28,2.04,2.04,0,0,1,2.04-2.34c1.23,0,1.97.84,1.97,2.22v.31H100.6v.05a1.16,1.16,0,0,0,1.14,1.26,1.05,1.05,0,0,0,1.04-.53Zm-3.07-1.42h2.2a1.05,1.05,0,0,0-1.07-1.12A1.12,1.12,0,0,0,100.6,12.14Z"/>
+          </svg>
+        </a>
+        <div class="moxie-ornament">V</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="container">
+      <p class="section-label reveal reveal-1">About</p>
+      <div class="about-grid">
+        <h2 class="about-headline reveal reveal-2">
+          Independent.<br /><em>Intentional.</em><br />Built for people.
+        </h2>
+        <div class="about-body reveal reveal-3">
+          <p>Jakie Studios is a small, independent app studio focused on making software that people genuinely love to use. We move deliberately — fewer projects, more care.</p>
+          <p>Every app we build starts with a real problem and ends with something refined, polished, and worth downloading.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <p class="section-label reveal reveal-1" style="justify-content:center; text-align:center;">Get in touch</p>
+        <h2 class="contact-headline reveal reveal-2">Let's work<br /><em>together.</em></h2>
+        <p class="contact-sub reveal reveal-3">Ideas, partnerships, or just to say hello.</p>
+        <a href="mailto:hi@jakiestudios.com" class="contact-link reveal reveal-4">hi@jakiestudios.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p class="footer-copy">© 2026 Jakie Studios</p>
+      <div class="footer-dot"></div>
+      <p class="footer-copy">All rights reserved</p>
+    </div>
+  </footer>
+
+</body>
+</html>
